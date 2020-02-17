@@ -13,7 +13,6 @@ namespace Lab1
             MoreThan(88, 88); // result is false (88 is equal 88, but not more)
             MoreThan(34, 2); // result is true (34 is more than 2)
             MoreThan(23, 57); // result is false (23 is less than 57)
-            
         }
        
         private static string DecimalToBinary(int number)
@@ -109,6 +108,35 @@ namespace Lab1
         private static string ExtendBits(string binary, int length) 
         {
             return binary.PadLeft(length, '0');
+        }
+
+        private static bool IfMore(int number1, int number2) // Another version of ">", works with negative too 
+        {
+            var i = Convert.ToString(Math.Abs(Math.Max(number1, number2)), 2).Length - 1;
+            for (int j = i; j >= 0; j--)
+            {
+                if ((number1 & (number1 << j)) > ((number2 & (number2 << j))))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private static void IfMore(int number1, int number2, out bool result)
+        {
+            var i = Convert.ToString(Math.Abs(Math.Max(number1, number2)), 2).Length - 1;
+            for (int j = i; j >= 0; j--)
+            {
+                if ((number1 & (number1 << j)) > ((number2 & (number2 << j))))
+                {
+                    result = true;
+                    return;
+                }
+            }
+
+            result = false;
         }
 
     }
