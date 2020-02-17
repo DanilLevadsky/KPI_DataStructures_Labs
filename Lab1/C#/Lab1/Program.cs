@@ -13,6 +13,7 @@ namespace Lab1
             MoreThan(88, 88); // result is false (88 is equal 88, but not more)
             MoreThan(34, 2); // result is true (34 is more than 2)
             MoreThan(23, 57); // result is false (23 is less than 57)
+            
         }
        
         private static string DecimalToBinary(int number)
