@@ -39,15 +39,13 @@ namespace Lab1
 
         private static bool IfMore(int number1, int number2)
         {
-            var sign = Addition(number1, Addition(~number2, 1));
-            sign >>= 31;
+            var sign = Addition(number1, Addition(~number2, 1)) >> 31;
             return sign == 0;
         }
 
         private static void IfMore(int number1, int number2, ref bool result)
         {
-            var sign = Addition(number1, Addition(~number2, 1));
-            sign >>= 31;
+            var sign = Addition(number1, Addition(~number2, 1)) >> 31;
             result = Convert.ToBoolean(sign == 0);
         }
     }
