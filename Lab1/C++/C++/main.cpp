@@ -11,110 +11,61 @@
 
 using namespace std;
 
-string DecimalToBinary(int);
-string ExtendBits(string, int);
+int Addition(int, int);
 int Increment(int);
 void Increment(int, int&);
-bool MoreThan(int, int);
-void MoreThan(int, int, bool&);
+bool IfMore(int, int);
+void IfMore(int, int, bool&);
+
 
 int main(int argc, const char * argv[]) {
+    cout<<Increment(15)<<endl;
+    cout<<Increment(-15)<<endl;
+    cout<<Increment(0)<<endl;
+    bool a, b, c, d, e;
+    IfMore(12, 1, a);
+    cout<<boolalpha<<a<<endl;
+    IfMore(-12, -7, b);
+    cout<<boolalpha<<b<<endl;
+    IfMore(-12, -11, e);
+    cout<<boolalpha<<e<<endl;
+    IfMore(1, 2, d);
+    cout<<boolalpha<<d<<endl;
+    IfMore(-2, -12, c);
+    cout<<boolalpha<<c<<endl;
 }
 
-string DecimalToBinary(int number)
+int Addition(int number1, int number2)
 {
-    if (number < 0)
-        number += 256;
-    string result = "";
-    while(number > 0){
-        result = string(1, (char) (number % 2 + 48)) + result;
-        number /= 2;
+    while (number2 != 0)
+    {
+        auto carry = number1 & number2;
+        number1 ^= number2;
+        number2 = carry << 1;
     }
-    return result;
-}   
+    return number1;
+}
 
 int Increment(int number)
 {
-    int result = number;
-    int index = DecimalToBinary(number).rfind('0');
-    for (int i = 0; i < DecimalToBinary(number).length()-index; i = -~i)
-    {
-        result ^= (1<<i);
-    }
-    return result;
+    return -~number;
 }
 
 void Increment(int number, int& result)
 {
-    result = number;
-    int index = DecimalToBinary(number).rfind('0');
-    for (int i = 0; i < DecimalToBinary(number).length()-index; i = -~i)
-    {
-        result ^= (1<<i);
-    }
+    result = -~number;
 }
 
-string ExtendBits(string binary, int length)
+bool IfMore(int number1, int number2)
 {
-    
-    if (length > binary.size())
-        binary.insert(0, length-binary.size(), '0');
-    return binary;
+    auto sign = Addition(number1, Addition(~number2, 1)) >> 31;
+    return sign == 0;
 }
 
-bool MoreThan(int number1, int number2)
+
+void IfMore(int number1, int number2, bool& result)
 {
-    string binary1 = ExtendBits(DecimalToBinary(number1), 16);
-    string binary2 = ExtendBits(DecimalToBinary(number2), 16);
-    for (int i = 0; i < 16; Increment(i, i))
-    {
-        if ((stoi(to_string((binary1[i]))) & 1))
-        {
-            if ((stoi(to_string((binary1[i]))) ^ stoi(to_string((binary2[i])))))
-            {
-             if (stoi(to_string(binary2[i])) != 1)
-             {
-                 return true;
-             }
-            }
-        }
-        if (((stoi(to_string(binary1[i]))) & 1) != 1)
-        {
-            if (stoi(to_string(binary2[i])) & 1)
-            {
-                return false;
-            }
-        }
-    }
-    return false;
+    auto sign = Addition(number1, Addition(~number2, 1)) >> 31;
+    result = (bool)(sign == 0);
 }
-
-void MoreThan(int number1, int number2, bool& result)
-{
-    string binary1 = ExtendBits(DecimalToBinary(number1), 16);
-    string binary2 = ExtendBits(DecimalToBinary(number2), 16);
-    for (int i = 0; i < 16; Increment(i, i))
-    {
-        if ((stoi(to_string((binary1[i]))) & 1))
-        {
-            if ((stoi(to_string((binary1[i]))) ^ stoi(to_string((binary2[i])))))
-            {
-             if (stoi(to_string(binary2[i])) != 1)
-             {
-                 result = true;
-                 return;
-             }
-            }
-        }
-        if (((stoi(to_string(binary1[i]))) & 1) != 1)
-        {
-            if (stoi(to_string(binary2[i])) & 1)
-            {
-                result = false;
-                return;
-            }
-        }
-    }
-    result = false;
-}
-
+ 

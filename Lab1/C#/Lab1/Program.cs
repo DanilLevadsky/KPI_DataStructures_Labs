@@ -10,134 +10,45 @@ namespace Lab1
             Increment(63); // result is 64
             Increment(-18); // result is -17
             Increment(92); // result is 93
-            MoreThan(88, 88); // result is false (88 is equal 88, but not more)
-            MoreThan(34, 2); // result is true (34 is more than 2)
-            MoreThan(23, 57); // result is false (23 is less than 57)
+            IfMore(11, -1); // result is true
+            IfMore(-1, -11); // result is true
+            IfMore(-1, 1); // result is false
         }
-       
-        private static string DecimalToBinary(int number)
-        {
-            var result = Convert.ToString(number, 2);
-            return number < 0 ? result.Substring(Math.Max(result.Length - 8, 0)).PadLeft(8, '0') : result;
-        }
-        
+
         private static int Increment(int number) //Increment function, using 'return'
         {
-            var result = number;
-            var index = DecimalToBinary(number).LastIndexOf('0');
-            for (var i = 0; i < DecimalToBinary(number).Length-index; i = -~i)
-            {
-                result ^= (1 << i);
-            }
-
-            return result;
+            return -~number;
         }
 
         private static void Increment(int number, out int result) // returning via parameter
         {
-            var increasedByOne = number;
-            var index = DecimalToBinary(number).LastIndexOf('0');
-            for (var i = 0; i < DecimalToBinary(number).Length-index; i = -~i)
+            result = -~number;
+        }
+
+        private static int Addition(int number1, int number2)
+        {
+            while (number2 != 0)
             {
-                increasedByOne ^= (1 << i);
+                var carry = number1 & number2;
+                number1 ^= number2;
+                number2 = carry << 1;
             }
 
-            result = increasedByOne;
+            return number1;
         }
-        
-        private static bool MoreThan(int number1, int number2)
+
+        private static bool IfMore(int number1, int number2)
         {
-            var binary1 = ExtendBits(DecimalToBinary(number1), 16);
-            var binary2 = ExtendBits(DecimalToBinary(number2), 16);
-            for (var i = 0; i < 16; Increment(i, out i))
-            {
-                
-                if ((Convert.ToInt32(binary1[i].ToString()) & 1) == 1)
-                {
-                    if ((Convert.ToInt32(binary1[i].ToString()) ^ Convert.ToInt32(binary2[i].ToString())) == 1)
-                    {
-                        if (Convert.ToInt32(binary2[i].ToString()) != 1)
-                        {
-                            return true;
-                        }
-                    }
-                }
-
-                if (((Convert.ToInt32(binary1[i].ToString())) & 1) != 1)
-                {
-                    if ((Convert.ToInt32(binary2[i].ToString()) & 1) == 1)
-                    {
-                        return false;
-                    }
-                }
-            }
-            return false;
+            var sign = Addition(number1, Addition(~number2, 1));
+            sign >>= 31;
+            return sign == 0;
         }
-        
-        private static void MoreThan(int number1, int number2, out bool result)
+
+        private static void IfMore(int number1, int number2, ref bool result)
         {
-            var binary1 = ExtendBits(DecimalToBinary(number1), 16);
-            var binary2 = ExtendBits(DecimalToBinary(number2), 16);
-            for (var i = 0; i < 16; Increment(i, out i))
-            {
-                
-                if ((Convert.ToInt32(binary1[i].ToString()) & 1) == 1)
-                {
-                    if ((Convert.ToInt32(binary1[i].ToString()) ^ Convert.ToInt32(binary2[i].ToString())) == 1)
-                    {
-                        if (Convert.ToInt32(binary2[i].ToString()) != 1)
-                        {
-                            result = true;
-                            return;
-                        }
-                    }
-                }
-
-                if (((Convert.ToInt32(binary1[i].ToString())) & 1) != 1)
-                {
-                    if ((Convert.ToInt32(binary2[i].ToString()) & 1) == 1)
-                    {
-                        result = false;
-                        return;
-                    }
-                }
-            }
-
-            result = false;
+            var sign = Addition(number1, Addition(~number2, 1));
+            sign >>= 31;
+            result = Convert.ToBoolean(sign == 0);
         }
-        private static string ExtendBits(string binary, int length) 
-        {
-            return binary.PadLeft(length, '0');
-        }
-
-        private static bool IfMore(int number1, int number2) // Another version of ">", works with negative too 
-        {
-            var i = Convert.ToString(Math.Abs(Math.Max(number1, number2)), 2).Length - 1;
-            for (int j = i; j >= 0; j--)
-            {
-                if ((number1 & (number1 << j)) > ((number2 & (number2 << j))))
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
-        private static void IfMore(int number1, int number2, out bool result)
-        {
-            var i = Convert.ToString(Math.Abs(Math.Max(number1, number2)), 2).Length - 1;
-            for (int j = i; j >= 0; j--)
-            {
-                if ((number1 & (number1 << j)) > ((number2 & (number2 << j))))
-                {
-                    result = true;
-                    return;
-                }
-            }
-
-            result = false;
-        }
-
     }
 }
