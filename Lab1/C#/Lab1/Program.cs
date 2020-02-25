@@ -13,6 +13,7 @@ namespace Lab1
             IfMore(11, -1); // result is true
             IfMore(-1, -11); // result is true
             IfMore(-1, 1); // result is false
+            IfMore(-1, 1); // result is false
         }
 
         private static int Increment(int number) //Increment function, using 'return'
@@ -39,12 +40,20 @@ namespace Lab1
 
         private static bool IfMore(int number1, int number2)
         {
+            if (!Convert.ToBoolean(number1 ^ number2))
+            {
+                return false;
+            }
             var sign = Addition(number1, Addition(~number2, 1)) >> 31;
             return sign == 0;
         }
 
         private static void IfMore(int number1, int number2, ref bool result)
-        {
+        {    
+            if (!Convert.ToBoolean(number1 ^ number2))
+            {
+                result = false;
+            }
             var sign = Addition(number1, Addition(~number2, 1)) >> 31;
             result = Convert.ToBoolean(sign == 0);
         }
