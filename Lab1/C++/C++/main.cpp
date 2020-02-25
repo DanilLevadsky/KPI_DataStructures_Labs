@@ -58,6 +58,10 @@ void Increment(int number, int& result)
 
 bool IfMore(int number1, int number2)
 {
+    if(!(bool)(number1 ^ number2))
+    {
+        return false;
+    }
     auto sign = Addition(number1, Addition(~number2, 1)) >> 31;
     return sign == 0;
 }
@@ -65,6 +69,10 @@ bool IfMore(int number1, int number2)
 
 void IfMore(int number1, int number2, bool& result)
 {
+    if(!(bool)(number1 ^ number2))
+    {
+        result = false;
+    }
     auto sign = Addition(number1, Addition(~number2, 1)) >> 31;
     result = (bool)(sign == 0);
 }
