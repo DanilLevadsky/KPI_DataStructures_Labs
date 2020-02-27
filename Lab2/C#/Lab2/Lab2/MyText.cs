@@ -8,8 +8,8 @@ namespace Lab2
 {
     public class MyText
     {
-        public MyString[] Value;
-        public int[] ArrOfLength;
+        private MyString[] Value;
+        private int[] ArrOfLength;
 
         public MyText()
         {
@@ -95,6 +95,15 @@ namespace Lab2
             }
 
             return (vowel / letters) * 100;
+        }
+
+        public void RemoveString(string substring)
+        {
+            var subArray = substring.ToCharArray();
+            foreach (var arr in this.Value)
+            {
+                
+            }
         }
         
     }
