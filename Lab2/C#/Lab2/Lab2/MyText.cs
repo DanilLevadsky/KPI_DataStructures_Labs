@@ -1,14 +1,12 @@
 using System;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Runtime.InteropServices;
-using System.Security.Cryptography;
 
 namespace Lab2
 {
     public class MyText
     {
         private MyString[] Value;
+        
         private int[] ArrOfLength;
 
         public MyText()
@@ -87,7 +85,7 @@ namespace Lab2
                 foreach (var letter in array.Value)
                 {
                     letters++;
-                    if ("eyuioaEYUIOA".Contains(letter) == true)
+                    if ("eyuioaEYUIOA".Contains(letter))
                     {
                         vowel++;
                     }
@@ -99,10 +97,27 @@ namespace Lab2
 
         public void RemoveString(string substring)
         {
-            var subArray = substring.ToCharArray();
-            foreach (var arr in this.Value)
+            for (var index = 0; index < this.Value.Length; index++)
             {
-                
+                var str = this.Value[index];
+                for (var i = 0; i < str.Value.Length; i++)
+                {
+                    if (str.Value[i] != substring[0]) continue;
+                    var counter = 0;
+                    for (var x = 0; x < substring.Length; x++)
+                    {
+                        if (str.Value[i + x] != substring[x])
+                        {
+                            break;
+                        }
+
+                        counter++;
+                    }
+
+                    if (counter != substring.Length) continue;
+                    RemoveString(index);
+                    index--;
+                }
             }
         }
         
