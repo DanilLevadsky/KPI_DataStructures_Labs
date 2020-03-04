@@ -8,13 +8,16 @@ namespace Lab2
 {
     public class MyString
     {
-        public readonly char[] Value;
-        public int StringLength;
+        private readonly char[] Value;
 
         public MyString(char[] value)
         {
             this.Value = value;
-            this.StringLength = this.Value.Length;
+        }
+
+        public char[] GetValue()
+        {
+            return this.Value;
         }
         
     }
