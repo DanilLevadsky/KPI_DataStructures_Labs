@@ -1,5 +1,4 @@
 #include <iostream>
-#include <cstring>
 #include <vector>
 #include "MyText.h"
 

@@ -18,7 +18,7 @@ class MyText {
         double averageLength();
         double percentOfVowel();
         void removeString(MyString substring);
-        bool isVowel(char);
+        static bool isVowel(char);
         int getLength();
 };
 
