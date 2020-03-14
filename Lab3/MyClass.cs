@@ -5,7 +5,6 @@ namespace Lab3
     public class MyClass
     {
         public int[,] Matrix { get; set; }
-
         public int Length { get; }
         public int Width { get; }
         public int AmountOfElements { get; }
