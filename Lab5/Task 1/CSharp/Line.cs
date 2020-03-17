@@ -5,12 +5,12 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace CSharp
 {
-    public class Line
+    internal class Line
     {
-        public double[][] Coordinates { get; set; }
-        public double Length { get; }
+        protected double[][] Coordinates { get; }
+        protected internal double Length { get; }
 
-        public Line(double[] start, double[] end)
+        protected Line(double[] start, double[] end)
         {
             this.Coordinates = new double[2][] {start, end};
             this.Length = GetLength();

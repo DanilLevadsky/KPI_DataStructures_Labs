@@ -2,13 +2,13 @@ using System;
 
 namespace CSharp
 {
-    public class Segment : Line
+    internal class Segment : Line
     {
-        public double oX_angle { get; }
+        protected internal double OxAngle { get; }
 
-        public Segment(double[] start, double[] end) : base(start, end)
+        internal Segment(double[] start, double[] end) : base(start, end)
         {
-            oX_angle = GetXAngle();
+            OxAngle = GetXAngle();
         }
 
         private double GetXAngle()

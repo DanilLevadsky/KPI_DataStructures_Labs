@@ -2,7 +2,7 @@
 
 namespace CSharp
 {
-    internal class Program
+    internal static class Program
     {
         private static void Main(string[] args)
         {
@@ -10,7 +10,7 @@ namespace CSharp
             var end = new double[3] {9.0, 6.0, -1.0};
             var segm = new Segment(start, end);
             Console.WriteLine($"Length: {segm.Length}");
-            Console.WriteLine($"Angle with oX: {segm.oX_angle} degrees");
+            Console.WriteLine($"Angle with oX: {segm.OxAngle} degrees");
         }
     }
 }
