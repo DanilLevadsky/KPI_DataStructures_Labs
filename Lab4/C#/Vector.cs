@@ -5,44 +5,44 @@ namespace CSharp
 {
     public class Vector
     {
-        private double XCoord { get; set; } // coordinate X
-        private double YCoord { get; set; } // coordinate Y
-        private double ZCoord { get; set; } // coordinate Z
-        private double Length { get; set; } // length of a Vector
+        private double _xCoord; // coordinate X
+        private double _yCoord; // coordinate Y
+        private double _zCoord; // coordinate Z
+        private double _length; // length of a Vector
 
         public Vector() // default constructor, null vector
         {
-            this.XCoord = 0;
-            this.YCoord = 0;
-            this.ZCoord = 0;
-            this.Length = Math.Sqrt(Math.Pow(this.XCoord, 2) + Math.Pow(this.YCoord, 2) + Math.Pow(this.ZCoord, 2));
+            this._xCoord = 0;
+            this._yCoord = 0;
+            this._zCoord = 0;
+            this._length = GetLength();
         }
 
         public Vector(double x, double y, double z) // constructor with parameters(coordinates of vector)
         {
-            this.XCoord = x;
-            this.YCoord = y;
-            this.ZCoord = z;
-            this.Length = Math.Sqrt(Math.Pow(x, 2) + Math.Pow(y, 2) + Math.Pow(z, 2));
+            this._xCoord = x;
+            this._yCoord = y;
+            this._zCoord = z;
+            this._length = GetLength();
         }
 
         public Vector(Vector vec) // copy of another vector
         {
-            this.XCoord = vec.XCoord;
-            this.YCoord = vec.YCoord;
-            this.ZCoord = vec.ZCoord;
-            this.Length = vec.Length;
+            this._xCoord = vec._xCoord;
+            this._yCoord = vec._yCoord;
+            this._zCoord = vec._zCoord;
+            this._length = vec.GetLength();
         }
 
         private double[] GetCoord() // method for getting coordinates of a Vector
         {
-            var coord = new double[3] {this.XCoord, this.YCoord, this.ZCoord};
+            var coord = new double[3] {this._xCoord, this._yCoord, this._zCoord};
             return coord;
         }
 
         private double GetLength() // method for getting coordinates
         {
-            return Math.Sqrt(Math.Pow(this.XCoord, 2) + Math.Pow(this.YCoord, 2) + Math.Pow(this.ZCoord, 2));
+            return Math.Sqrt(Math.Pow(this._xCoord, 2) + Math.Pow(this._yCoord, 2) + Math.Pow(this._zCoord, 2));
         }
         
         private double this[int index]
@@ -56,8 +56,8 @@ namespace CSharp
         
         public void VectorInfo() // printing info about a vector
         {
-            Console.WriteLine("Vector`s length: {0}", this.Length);
-            Console.WriteLine("Vector`s coordinates: ({0}, {1}, {2})\n", this.XCoord, this.YCoord, this.ZCoord);
+            Console.WriteLine("Vector`s length: {0}", this._length);
+            Console.WriteLine("Vector`s coordinates: ({0}, {1}, {2})\n", this._xCoord, this._yCoord, this._zCoord);
             
         }
         
@@ -65,22 +65,22 @@ namespace CSharp
         {
             var result = new Vector
             {
-                XCoord = vec1.XCoord + vec2.XCoord,
-                YCoord = vec1.YCoord + vec2.YCoord,
-                ZCoord = vec1.ZCoord + vec2.ZCoord,
+                _xCoord = vec1._xCoord + vec2._xCoord,
+                _yCoord = vec1._yCoord + vec2._yCoord,
+                _zCoord = vec1._zCoord + vec2._zCoord,
             };
-            result.Length = result.GetLength();
+            result._length = result.GetLength();
             return result;
         }
         public static Vector operator -(Vector vec1, Vector vec2) // vector subtraction
         {
             var result = new Vector
             {
-                XCoord = vec1.XCoord - vec2.XCoord,
-                YCoord = vec1.YCoord - vec2.YCoord,
-                ZCoord = vec1.ZCoord - vec2.ZCoord
+                _xCoord = vec1._xCoord - vec2._xCoord,
+                _yCoord = vec1._yCoord - vec2._yCoord,
+                _zCoord = vec1._zCoord - vec2._zCoord
             };
-            result.Length = result.GetLength();
+            result._length = result.GetLength();
             return result;
         }
         
@@ -97,13 +97,16 @@ namespace CSharp
 
         public static Vector operator *(Vector vector, double times) // increase a vector
         {
-            vector.XCoord *= times;
-            vector.YCoord *= times;
-            vector.ZCoord *= times;
-            vector.Length *= times;
+            vector._xCoord *= times;
+            vector._yCoord *= times;
+            vector._zCoord *= times;
+            vector._length = vector.GetLength();
             return vector;
         } 
-        
+        public static Vector operator *(double times, Vector vector) // increase a vector
+        {
+            return vector * times;
+        } 
         
     }
 }
