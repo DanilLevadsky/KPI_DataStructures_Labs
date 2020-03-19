@@ -43,6 +43,7 @@ void Vector::VectorInfo() {
     std::cout << "Vector`s length: " << this->Length << std::endl;
     printf("Vector`s coordinates: (%f, %f, %f)", GetCoord()[0], GetCoord()[1], GetCoord()[2]);
     std::cout << std::endl;
+    std::cout << std::endl;
 }
 
 // vector addition
