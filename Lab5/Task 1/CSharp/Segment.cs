@@ -2,11 +2,11 @@ using System;
 
 namespace CSharp
 {
-    internal class Segment : Line
+    public class Segment : Line
     {
-        protected internal double OxAngle { get; }
+        public double OxAngle { get; }
 
-        internal Segment(double[] start, double[] end) : base(start, end)
+        public Segment(double[] start, double[] end) : base(start, end)
         {
             OxAngle = GetXAngle();
         }

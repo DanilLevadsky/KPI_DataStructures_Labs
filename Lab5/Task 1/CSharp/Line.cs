@@ -5,7 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace CSharp
 {
-    internal class Line
+    public class Line
     {
         protected double[][] Coordinates { get; }
         protected internal double Length { get; }
