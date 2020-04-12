@@ -48,7 +48,7 @@ namespace CSharp
         {
             get
             {
-                var coord = this.GetCoord();
+                var coord = GetCoord();
                 return coord[index];
             }
         }
