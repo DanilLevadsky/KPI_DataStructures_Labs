@@ -4,29 +4,30 @@ namespace CSharp
 {
     public class MyString
     {
-        private char[] _value;
-        private int Length { get; set; }
+        protected char[] Value;
+        public string GetValue() => string.Join("", Value);
 
-        protected internal MyString(char[] str)
+        public MyString(char[] str)
         {
-            this._value = str;
-            this.Length = GetLength();
+            this.Value = str;
         }
 
-        protected virtual int GetLength()
+        protected internal virtual int GetLength()
         {
-            return _value.Length;
+            return this.Value.Length;
         }
 
         public virtual void Insert(char elem, int index)
         {    
-            Array.Resize(ref this._value, _value.Length + 1);
-            for (var i = index; i < _value.Length - 1; i++)
+            var newValue = new char[GetLength() + 1];
+            Array.Copy(this.Value, 0, newValue, 0, GetLength());
+            for (var i = index; i < Value.Length; i++)
             {
-                _value[i + 1] = _value[i];
+                newValue[i + 1] = Value[i];
             }
 
-            _value[index] = elem;
+            newValue[index] = elem;
+            this.Value = newValue;
         }
     }
 }
