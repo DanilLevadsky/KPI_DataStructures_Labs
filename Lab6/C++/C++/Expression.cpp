@@ -9,7 +9,7 @@ Expression::Expression(double a, double c, double d) {
 
 double Expression::Calculate() {
     if (this->_a == 0) {
-        throw "Divide by zero exception. Denominator shouldn`t be equal 0.";
+        throw "DivideByZeroException. Denominator shouldn`t be equal 0.";
     }
     if (this->_a >= 4) {
         throw "ArgumentException. Logarithmic argument should be more than 0 and not equal 1";
