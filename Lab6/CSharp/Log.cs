@@ -3,7 +3,7 @@ using System;
 
 namespace CSharp
 {
-    public abstract class Log
+    public class Log
     {
         public static void LogTrace(params Exception[] e)
         {
