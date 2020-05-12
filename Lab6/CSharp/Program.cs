@@ -9,9 +9,9 @@ namespace CSharp
         {
             var array = new Expression[6]
             {
-                new Expression(-3, 2, 3), new Expression(-12, 2, 0), 
-                new Expression(2.1, 5, 1), new Expression(-0.0, 2, -1), 
-                new Expression(-1, 2, 5), new Expression(3,1,3)
+                new Expression(-3, 2, 3), new Expression(12, 2, 0), 
+                new Expression(2.1, 5, 1), new Expression(5.0, 2, -1), 
+                new Expression(-1, 2, 5), new Expression(0,1,3)
             };
             foreach (var exp in array)
             {
@@ -22,7 +22,7 @@ namespace CSharp
                 }
                 catch (Exception e)
                 {
-                    LogTrace(e);
+                    LogException(e);
                 }
             }
         }

@@ -5,7 +5,7 @@ namespace CSharp
 {
     public class Log
     {
-        public static void LogTrace(params Exception[] e)
+        public static void LogException(params Exception[] e)
         {
             const string fileName = "/Users/danillevadsky/RiderProjects/KPILabs/Lab6/CSharp/exceptions.log";
 
