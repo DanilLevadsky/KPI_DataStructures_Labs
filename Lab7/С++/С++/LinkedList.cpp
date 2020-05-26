@@ -1,41 +1,83 @@
 #include <iostream>
 #include "LinkedList.hpp"
 
+LinkedList::LinkedList(){
+    head = NULL;
+    _size = 0;
+}
+
+void LinkedList::Push(int value){
+    if (head == NULL){
+        head = new Node(value, NULL);
+        current = head;
+        _size++;
+        return;
+    }
+    auto newNode = new Node(value, NULL);
+    current->next = newNode;
+    current = newNode;
+    _size++;
+}
+
+
 int LinkedList::DividedByFive(){
     int counter = 0;
-    Node* temp = head;
-    while (temp != NULL) {
-        if (temp->value % 5 == 0){
+    current = head;
+    while (current != NULL) {
+        if (current->value % 5 == 0){
             counter++;
         }
-        temp = temp->ptr;
+        current = current->next;
     }
     return counter;
 }
 
-void LinkedList::RemoveAfterMax(){
-    Node* temp = head;
-    int maxElement = head->value;
-    while (temp != NULL){
-        if (temp->value > maxElement){
-            maxElement = temp->value;
+int& LinkedList::operator[](const int index){
+    int counter = 0;
+    int result = 0;
+    current = head;
+    while (current != NULL){
+        if (counter == index){
+            result = current->value;
+            break;
         }
-        temp = temp->ptr;
+        current = current->next;
+        counter++;
     }
-    temp = head;
-    while (temp != NULL){
-        if (temp->value == maxElement){
-            temp->ptr = NULL;
+    return result = -1;
+}
+
+
+int LinkedList::Size() {
+    return this->_size;
+    
+}
+
+void LinkedList::RemoveAfterMax(){
+    current = head;
+    int maxElement = head->value;
+    while (current != NULL){
+        if (current->value > maxElement){
+            maxElement = current->value;
         }
-        temp = temp->ptr;
+        current = current->next;
+    }
+    current = head;
+    _size = 0;
+    while (current != NULL){
+        if (current->value == maxElement){
+            current->next = NULL;
+        }
+        current = current->next;
+        _size++;
     }
 }
 
 void LinkedList::PrintList(){
-    Node* temp = head;
-    while (temp != NULL){
-        std::cout << temp->value << " -> ";
-        temp = temp->ptr;
+    current = head;
+    while (current != NULL){
+        std::cout << current->value << " -> ";
+        current = current->next;
     }
     std::cout << "null" << std::endl;
 }

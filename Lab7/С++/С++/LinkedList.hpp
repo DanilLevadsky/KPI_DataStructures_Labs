@@ -6,10 +6,18 @@
 
 class LinkedList{
     public:
-        Node* head;
+        int Size();
+        void Push(int value);
+        int& operator[](const int index);
         int DividedByFive();
         void PrintList();
         void RemoveAfterMax();
+        LinkedList();
+    
+    private:
+        Node* head;
+        Node* current;
+        int _size;
 };
 
 #endif /* LinkedList_hpp */

@@ -5,31 +5,42 @@ namespace CSharp
 {
     public class LinkedList
     {
-        public Node Head;
-        
-        public class Node
-        {
-            public int Data { get; }
-            public Node Link;
+        private Node _head;
+        private Node _current;
+        public int Size { get; private set; }
 
-            public Node(int _data)
-            {
-                this.Data = _data;
-                this.Link = null;
-            }
+        public LinkedList()
+        {
+            _head = null;
+            Size = 0;
         }
 
+        public void Push(int value)
+        {
+            if (_head == null)
+            {
+                _head = new Node(value);
+                _current = _head;
+                Size++;
+                return;
+            }
+            var newNode = new Node(value);
+            _current.Next = newNode;
+            _current = newNode;
+            Size++;
+        }
+        
         public int DividedByFive()
         {
             var counter = 0;
-            var foo = Head;
-            while (foo != null)
+            _current = _head;
+            while (_current != null)
             {
-                if (foo.Data % 5 == 0)
+                if (_current.Data % 5 == 0)
                 {
                     counter++;
                 }
-                foo = foo.Link;
+                _current = _current.Next;
             }
 
             return counter;
@@ -37,38 +48,62 @@ namespace CSharp
 
         public void RemoveAfterMax()
         {
-            var temp = Head;
-            var maxElement = Head.Data;
-            while (temp != null)
+            
+            _current = _head;
+            var maxElement = _head.Data;
+            while (_current != null)
             {
-                if (temp.Data > maxElement)
+                if (_current.Data > maxElement)
                 {
-                    maxElement = temp.Data;
+                    maxElement = _current.Data;
                 }
 
-                temp = temp.Link;
+                _current = _current.Next;
             }
 
 
-            temp = Head;
-            while (temp != null)
+            _current = _head;
+            Size = 0;
+            while (_current != null)
             {
-                if (temp.Data == maxElement)
+                if (_current.Data == maxElement)
                 {
-                    temp.Link = null;
+                    _current.Next = null;
                 }
-                temp = temp.Link;
+                _current = _current.Next;
+                Size++;
             }
+        }
 
+        public int? this[int index]
+        {
+            get
+            {
+                if (index < 0 || index >= Size)
+                {
+                    Console.WriteLine("Out of range.");
+                    return null;
+                }
+
+                var i = 0;
+                _current = _head;
+                while (i != index)
+                {
+                    _current = _current.Next;
+                    i++;
+                }
+                
+                return _current.Data;
+            }
         }
 
         public void PrintLinkedList()
         {
-            var foo = Head;
-            while (foo != null)
+            _current = _head;
+            while (_current != null)
             {
-                Console.Write(foo.Data + " -> ");
-                foo = foo.Link;
+                Console.Write(_current.Data + " -> ");
+                _current = _current.Next;
             }
 
             Console.WriteLine( "null");

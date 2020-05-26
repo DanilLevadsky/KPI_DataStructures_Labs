@@ -11,7 +11,7 @@ namespace CSharp
             Task.ArrayOperation sortByDescending = Task.SortByDescending;
             sortByDescending += Task.PrintArray;
             sortByDescending(arr);
-            
+
             // Task 2
             var q = new CustomQueue<int>(2);
             q.QueueOverloadEvent += QueueOverflowHandler;
@@ -25,6 +25,7 @@ namespace CSharp
             q.Enqueue(8);
             q.Enqueue(9);
             q.PrintQueue();
+            
         }
 
         private static void QueueOverflowHandler(QueueHandlerArgs handlerArgs) => Console.WriteLine(handlerArgs.Message);

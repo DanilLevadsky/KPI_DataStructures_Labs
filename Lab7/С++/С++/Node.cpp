@@ -1,6 +1,6 @@
 #include "Node.hpp"
 
-Node::Node(int value){
+Node::Node(int value, Node* next = NULL){
     this->value = value;
-    ptr = NULL;
+    this->next = next;
 }

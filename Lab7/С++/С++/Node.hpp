@@ -7,8 +7,8 @@
 class Node{
     public:
         int value;
-        Node* ptr;
-        Node(int value);
+        Node* next;
+        Node(int value, Node* next);
 };
 
 #endif /* Node_hpp */
